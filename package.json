@@ -1,0 +1,40 @@
+{
+  "name": "perfect-stack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm:server\" \"npm:tailwind-watch\"",
+    "server": "imba -w src/server.imba",
+    "tailwind-watch": "tailwindcss -i tailwind/app.css -o src/index.css --watch",
+    "tailwind": "tailwindcss -i tailwind/app.css -o src/index.css",
+    "seed": "edgedb query --file=dbschema/seeds/initial.edgeql"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haikyuu/perfect-stack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haikyuu/perfect-stack/issues"
+  },
+  "homepage": "https://github.com/haikyuu/perfect-stack#readme",
+  "dependencies": {
+    "@inertiajs/inertia": "^0.10.1",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "concurrently": "^6.2.1",
+    "edgedb": "^0.15.2",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "imba": "^2.0.0-alpha.165",
+    "inertia-node": "^2.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.3.2",
+    "postcss": "^8.3.6",
+    "tailwindcss": "^2.2.7"
+  }
+}
