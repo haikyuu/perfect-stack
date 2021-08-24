@@ -8,6 +8,7 @@ import index from './index.html'
 
 import UserController from './controllers/UserController'
 import LoginController from './controllers/LoginController'
+import OrganizationsController from './controllers/OrganizationsController'
 
 const server = express!
 server.use bodyParser.json!
@@ -42,10 +43,15 @@ server.use do(req, res, next)
 			auth:
 				user: user
 		return next!
-	req.Inertia.redirect "/login" unless user
+	req.Inertia.redirect "/login"
 
+# routes that require logic go here
+server.use "/organizations", OrganizationsController!
+
+# dashboard page
 server.use "/", do(req, res)
 	req.Inertia.render 
 		component: "dashboard-page"
+
 
 imba.serve server.listen process.env.PORT or 3000

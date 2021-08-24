@@ -2,7 +2,7 @@ import { Inertia, mergeDataIntoQueryString, shouldIntercept } from '@inertiajs/i
 
 const noop = do() undefined
 
-tag inertia-link < a
+tag inertia-button-link < button
 	prop data\object = {}
 	prop href\string
 	prop method\"get"|"post"|"patch"|"put"|"delete" = "get"
@@ -50,9 +50,5 @@ tag inertia-link < a
 		const [_href, _data] = mergeDataIntoQueryString(method, href || '', data)
 		href = _href
 		data = _data
-		if method !== 'get'
-			console.warn(`Creating POST/PUT/PATCH/DELETE <a> links is discouraged as it causes "Open Link in New Tab/Window" accessibility issues.\n\nPlease specify a more appropriate element using the "_as" attribute. For example:\n\n<inertia-link href="{href}" method="{method}" using="button">`)
 
-		<self @click=_visit href=_href class=className>	<slot>
-		
-	
+		<self @click=_visit class=className type="button">	<slot> _href

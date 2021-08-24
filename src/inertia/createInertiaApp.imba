@@ -1,5 +1,6 @@
 import {InertiaApp} from './App'
 import "./InertiaLink"
+import "./InertiaButtonLink"
 
 export default def createInertiaApp { id = 'app', resolve, setup, title, page, render }
 	const isServer = typeof window === 'undefined'

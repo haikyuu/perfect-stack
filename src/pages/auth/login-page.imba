@@ -8,7 +8,6 @@ tag login-page
 			remember: true
 
 	def render
-		console.log form
 		<self>
 			<div .p-6.bg-indigo-800.min-h-screen.flex.justify-center.items-center>
 				<div .w-full.max-w-md>

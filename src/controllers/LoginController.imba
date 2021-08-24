@@ -9,9 +9,12 @@ export default def LoginController
 		req.Inertia.render 
 			component: "login-page"
 
+	router.delete "/" do(req, res)
+		req.session.user = null
+		req.Inertia.redirect "/"
+
 	router.post "/" do(req, res)
 		const {body} = req
-		console.log body
 		const conn = await edgedb!
 		try
 			const user = await conn.querySingle\<{id:string, owner:boolean, password:string, first_name:string, last_name:string}> `

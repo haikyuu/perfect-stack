@@ -3,7 +3,6 @@ tag icon
 
 	def render
 		const classes = String classList
-		console.log self.flags
 		<self>
 			switch name
 				when "apple"
