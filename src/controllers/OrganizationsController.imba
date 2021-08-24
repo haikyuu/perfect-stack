@@ -8,60 +8,93 @@ export default def OrganizationsController
 	router.get "/" do(req, res)
 		console.time("get orgs")
 		const conn = await edgedb!
-		const {search = "", trashed} = req.query
+		const {query} = req
+		const {search = "", trashed, page = 0} = query
 		let filterQuery = 'NOT EXISTS User.deleted_at'
 		if trashed === 'only'
 			filterQuery = `EXISTS User.deleted_at`
 		else if trashed === 'with'
 			filterQuery = `TRUE`
 
+		let limit = 10;
+		let offset = +page * limit;
 		const queryArgs = 
 			userId: req.session.user.id
 			search: search
+			offset: offset
+			limit: limit
 		console.log queryArgs
 
-		const organizations = await conn.query `
-			SELECT Organization\{
-				id, name, city, phone, deleted_at	
-			\} FILTER 
-			   		.account = (
-						SELECT User FILTER
-							User.id = <uuid>$userId AND
-							NOT EXISTS .deleted_at
-						) AND 
-					contains( str_lower(Organization.name), str_lower(<str>$search) ) AND
-					{filterQuery}
+		const result = await conn.query `
+			WITH orgs := 
+				(
+					SELECT Organization FILTER 
+							.account = (
+								SELECT User FILTER
+									User.id = <uuid>$userId AND
+									NOT EXISTS .deleted_at
+								) AND 
+							contains( str_lower(Organization.name), str_lower(<str>$search) ) AND
+							{filterQuery}
+				)
+			SELECT (
+				organizations := (
+					SELECT orgs \{
+						id, name, city, phone, deleted_at	
+					}
+						ORDER BY .created_at ASC
+						OFFSET <int64>$offset
+						LIMIT <int64>$limit
+				),
+				total := count(orgs)
+			)
 		`, queryArgs
-
+		# try
+		# 	parsed = JSON.parse result
+		let organizations = []
+		let total = 0
+		if result.length > 0
+			organizations = result.map do(org) org.organizations
+			total = result[0].total
+		const lastPage = Math.ceil total / limit
+		console.log "last", total, lastPage
 		console.timeEnd("get orgs")
+		console.log organizations
+		def getPage(url, page) 
+			`{url}?{String(new URLSearchParams { ...query, page: page })}`
+		def getOrgPage page
+			getPage '/organizations', page
+
+		let links = []
+		for num in [1 .. lastPage]
+			let label = num
+			if num === 1
+				label = "&laquo; Previous"
+			else if num === lastPage
+				label = "Next &raquo;"
+			links.push 
+				url: getOrgPage num
+				label: label
+				active: num === page
+
 		req.Inertia.render
 			component: "organizations-page"
 			props:
 				filters: 
-					search: null
-					trashed: null
+					search: search
+					trashed: trashed
 				organizations:
-					current_page: 1
+					page: page
 					data: organizations
-					first_page_url: "/organizations?trashed=with&page=1"
-					from: 1
-					last_page: 10
-					last_page_url: "/organizations?trashed=with&page=10"
-					links: [
-						{
-							url: null
-							label: "&laquo; Previous"
-							active: false
-						}
-						{
-							active: true
-							label: "1"
-							url: "/organizations?trashed=with&page=1"
-						}
-					]
-					next_page_url: "/organizations?trashed=with&page=2"
+					first_page_url: getOrgPage(0)
+					from: 0
+					last_page: lastPage
+					last_page_url: getOrgPage(lastPage)
+					next_page_url: getOrgPage(+page + 1)
 					path: "/organizations"
-					per_page: 10
+					per_page: limit
 					prev_page_url: null
-					to: 10
-					total: 100
+					to: lastPage
+					total: total
+					links: links
+					

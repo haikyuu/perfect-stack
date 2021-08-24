@@ -1,25 +1,28 @@
 import Form from '../../inertia/Form'
 
 tag organizations-page
+	prop props
 	def setup
+		const {filters, organizations} = props.props
 		form = new Form
-			search: ""
-			trashed: ""
+			search: filters.search
+			trashed: filters.trashed
+			current_page: organizations.current_page
 
 	def onChange form
-		const {search, trashed} = form.data
-		console.log "onchange", search, trashed
-		form.get "/organizations?search={search}&trashed={trashed}", { preserveState: yes }
+		const {search, trashed, current_page} = form.data
+		form.get "/organizations?search={search}&trashed={trashed}&page={current_page}", { preserveState: yes }
 		
 	def onChangeCreator form
 		return do() onChange(form)
 	def onResetCreator form
 		do() 
-			console.log "reset"
 			form.reset!
 			onChange form
 	def render
-		const organizations = #context.currentPage.page.props.organizations
+		const {organizations} = props.props
+		const {links} = organizations
+		console.log links
 		<self>
 			<page-layout>
 				<h1 .mb-8.font-bold.text-3xl> "Organizations"
@@ -71,4 +74,4 @@ tag organizations-page
 						
 					
 				
-				<pagination .mt-6 links=organizations.links>
+				<pagination .mt-6 links=links>
