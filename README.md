@@ -22,15 +22,16 @@ Included in this repo is an inertia adapter for Imba as well as an inertia adapt
 
 If you add some tailwindcss classes, make sure you run `npm run tailwind` to build the css file or run `npm start` to watch on the changes
 
+# Done
+- Login
+- Manage Organizations
+  -  Create
+  -  Update
+  -  Delete (soft deletes)
+  -  Restore
+  - Search and filter
 # Roadmap
 - [ ] Complete Ping CRM functionality
-  - [x] Login
-  - [x] Manage Organizations
-    - [x] Create
-    - [x] Update
-    - [x] Delete (soft deletes)
-    - [x] Restore
-    - [x] Search and filter
   - [ ] Manage Contacts
   - [ ] Manage users (contains file upload)
 - [ ] Polish the API of inertia adapters for Imba
