@@ -25,7 +25,7 @@ tag page-layout
 								<div .flex.items-center.cursor-pointer.select-none.group>
 									<div .text-gray-700.{'group-hover:text-indigo-600'}.{'focus:text-indigo-600'}.mr-1.whitespace-nowrap>
 										<span> user.first_name
-										<span .hidden.{'md:inline'}> user.last_name
+										<span[ml:1] .hidden.{'md:inline'}> user.last_name
 									
 									<icon .w-5.h-5.{'group-hover:fill-indigo-600'}.fill-gray-700.{'focus:fill-indigo-600'} name="cheveron-down" />
 								
@@ -40,7 +40,8 @@ tag page-layout
 					<div .{'md:flex'}.{'md:flex-grow'}.{'md:overflow-hidden'}>
 						<main-menu .hidden.{'md:block'}.bg-indigo-800.flex-shrink-0.w-56.p-12.overflow-y-auto />
 						<div .{'md:flex-1'}.px-4.py-8.{'md:p-12'}.{'md:overflow-y-auto'} scroll-region>
-							# <flash-messages />
+							<div[w:100% h:1] innerHTML="<div style='width:100%; height:1px' scroll-region/>">
+							<flash-messages>
 							<slot />
 						
 					

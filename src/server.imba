@@ -1,9 +1,10 @@
 import express from 'express'
 import edgedb from 'edgedb'
-import inertia from 'inertia-node'
+
+import inertia from './inertia-express/inertia'
+import flash from './inertia-express/flash'
 import bodyParser from 'body-parser'
 import session from 'express-session'
-
 import index from './index.html'
 
 import UserController from './controllers/UserController'
@@ -23,15 +24,20 @@ if server.get('env') === 'production'
 	sessionOptions.cookie.secure = true # serve secure cookies
 
 server.use session(sessionOptions)
-
+server.use flash!
 
 # Add Inertia middleware
 const ASSET_VERSION = "1"
-def _html pageString\string, viewData
-	let page = index.body.replace ",,,", pageString
-	return String page
+def _html pageObject, viewData
+	String index.body.replace ",,,", JSON.stringify pageObject
 
-server.use inertia(_html, ASSET_VERSION)
+
+server.use inertia
+	version: ASSET_VERSION
+	html: _html
+	# @ts-ignore
+	flashMessages: do(req) req.flash.flashAll!
+
 
 server.use "/login", LoginController!
 
@@ -42,6 +48,8 @@ server.use do(req, res, next)
 		req.Inertia.shareProps
 			auth:
 				user: user
+			requestId:
+				Math.random()
 		return next!
 	req.Inertia.redirect "/login"
 

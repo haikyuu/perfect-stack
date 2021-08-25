@@ -26,7 +26,9 @@ module default {
 
 	type Organization extending WithTimestamps, WithSoftDeletes {
 		required link account -> User;
-		required property name -> str;
+		required property name -> str {
+			constraint min_len_value(3);
+		};
 		property email -> str;
 		property phone -> str;
 		property address -> str;

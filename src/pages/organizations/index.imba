@@ -10,19 +10,20 @@ tag organizations-page
 			current_page: organizations.current_page
 
 	def onChange form
-		const {search, trashed, current_page} = form.data
-		form.get "/organizations?search={search}&trashed={trashed}&page={current_page}", { preserveState: yes }
+		const {search, trashed, page = 1} = form.data
+		form.get "/organizations?search={search}&trashed={trashed}&page={page}", { preserveState: yes }
 		
 	def onChangeCreator form
 		return do() onChange(form)
 	def onResetCreator form
 		do() 
-			form.reset!
+			# form.reset! # resets to initial values ... we want to clear instead
+			form.data.search = ""
+			form.data.trashed = ""
 			onChange form
 	def render
 		const {organizations} = props.props
 		const {links} = organizations
-		console.log links
 		<self>
 			<page-layout>
 				<h1 .mb-8.font-bold.text-3xl> "Organizations"
@@ -35,7 +36,7 @@ tag organizations-page
 							<option value="only"> "Only Trashed"
 						
 					
-					<inertia-link .btn-indigo :href="route('organizations.create')">
+					<inertia-link .btn-indigo href="/organizations/create">
 						<span> "Create"
 						<span .hidden.{'md:inline'}> "Organization"
 					
@@ -59,12 +60,12 @@ tag organizations-page
 									<inertia-link .px-6.py-4.flex.items-center href="/organizations/{organization.id}/edit" tabIndex="-1">
 										organization.city	
 								<td .border-t>
-									<inertia-link .px-6.py-4.flex.items-center :href="/organizations/{organization.id}/edit" tabIndex="-1">
+									<inertia-link .px-6.py-4.flex.items-center href="/organizations/{organization.id}/edit" tabIndex="-1">
 										organization.phone
 									
 								
 								<td .border-t.w-px>
-									<inertia-link .px-4.flex.items-center :href="/organizations/{organization.id}/edit" tabIndex="-1">
+									<inertia-link .px-4.flex.items-center href="/organizations/{organization.id}/edit" tabIndex="-1">
 										<icon name="cheveron-right" .block.w-6.h-6.fill-gray-400 />
 									
 								

@@ -7,8 +7,6 @@ export default def createInertiaApp { id = 'app', resolve, setup, title, page, r
 	const el = isServer ? null : document.getElementById(id)
 	const initialPage = page || JSON.parse(el.dataset.page)
 	const resolveComponent = do(name) await name
-	# Promise.resolve(resolve(name)).then do(module)
-	# 	module.default or module
 
 	let head = []
 
