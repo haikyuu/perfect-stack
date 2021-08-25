@@ -148,7 +148,8 @@ export default def OrganizationsController
 		console.time("get orgs")
 		const conn = await edgedb!
 		const {query} = req
-		const {search = "", trashed, page = 1} = query
+		const {search = "", trashed,} = query
+		const page = +query.page or 1
 		let filterQuery = 'NOT EXISTS Organization.deleted_at'
 		if trashed === 'only'
 			filterQuery = `EXISTS Organization.deleted_at`
