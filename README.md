@@ -14,3 +14,17 @@ Included in this repo is an inertia adapter for Imba as well as an inertia adapt
 - Run `npm start-server` 
 
 If you add some tailwindcss classes, make sure you run `npm run tailwind` to build the css file or run `npm start` to watch on the changes
+
+# Roadmap
+- [ ] Complete Ping CRM functionality
+  - [ ] Manage Contacts
+  - [ ] Manage users (contains upload)
+- [ ] Polish the API of inertia adapters for Imba
+- [ ] Extract useful Imba components (e.g: portal)
+- [ ] Polish the API of inertia express adapter
+- [ ] Add unit tests
+- [ ] Add integration tests
+- [ ] Deploy to the cloud
+
+# License
+MIT license.
