@@ -37,4 +37,22 @@ module default {
 		property country -> str;
 		property postal_code -> str;
 	}
+
+	type Contact extending WithTimestamps, WithSoftDeletes {
+		required link account -> User;
+		link organization -> Organization;
+		required property first_name -> str {
+			constraint min_len_value(3);
+		};
+		required property last_name -> str {
+			constraint min_len_value(3);
+		};
+		property email -> str;
+		property phone -> str;
+		property address -> str;
+		property city -> str;
+		property region -> str;
+		property country -> str;
+		property postal_code -> str;	
+	}
 }
