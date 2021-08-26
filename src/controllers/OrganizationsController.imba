@@ -151,9 +151,9 @@ export default def OrganizationsController
 		const {search = "", trashed,} = query
 		const page = +query.page or 1
 		let filterQuery = 'NOT EXISTS Organization.deleted_at'
-		if trashed === 'only'
+		if trashed === "Only Trashed"
 			filterQuery = `EXISTS Organization.deleted_at`
-		else if trashed === 'with'
+		else if trashed === "With Trashed"
 			filterQuery = `TRUE`
 
 		let limit = 10;
