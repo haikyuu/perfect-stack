@@ -17,8 +17,9 @@ export default class Form<TForm extends Object> {
   recentlySuccessful: boolean;
 
   cancelToken: import("axios").CancelTokenSource;
-  transform: (callback: (data: TForm) => TForm) => void = (callback) => {
+  transform: (callback: (data: TForm) => TForm) => Form<TForm> = (callback) => {
     this._transform = callback;
+    return this;
   };
 
   constructor(props: TForm) {

@@ -31,9 +31,11 @@
     "concurrently": "^6.2.1",
     "edgedb": "^0.15.2",
     "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
     "express-session": "^1.17.2",
     "imba": "^2.0.0-alpha.165",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "multer": "^1.4.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.2",

@@ -1,13 +1,13 @@
+import UsersController from './controllers/UsersController'
 import ContactsController from './controllers/ContactsController'
 import express from 'express'
-
+import fileUpload from 'express-fileupload'
 import inertia from './inertia-express/inertia'
 import flash from './inertia-express/flash'
 import bodyParser from 'body-parser'
 import session from 'express-session'
 import index from './index.html'
 
-import UserController from './controllers/UserController'
 import LoginController from './controllers/LoginController'
 import OrganizationsController from './controllers/OrganizationsController'
 import {initDatabase} from './services/db'
@@ -28,6 +28,7 @@ def createServer
 		sessionOptions.cookie.secure = true # serve secure cookies
 
 	server.use session(sessionOptions)
+	server.use fileUpload!
 	server.use flash!
 
 	# Add Inertia middleware
@@ -55,11 +56,13 @@ def createServer
 				requestId:
 					Math.random()
 			return next!
+		console.log req.session
 		req.Inertia.redirect "/login"
 
 	# routes that require logic go here
 	server.use "/organizations", OrganizationsController!
 	server.use "/contacts", ContactsController!
+	server.use "/users", UsersController!
 
 	# dashboard page
 	server.use "/", do(req, res)

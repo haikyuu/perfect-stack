@@ -11,6 +11,10 @@ module default {
 	type User extending WithTimestamps, WithSoftDeletes {
 		required property first_name -> str;
 		required property last_name -> str;
+		property name :=
+			.first_name ++ ' ' ++ .last_name
+			IF EXISTS .last_name
+			ELSE .first_name;	
 		required property email -> str {
 			constraint exclusive;
 		}
@@ -37,7 +41,6 @@ module default {
 		property country -> str;
 		property postal_code -> str;
 	}
-
 	type Contact extending WithTimestamps, WithSoftDeletes {
 		required link account -> User;
 		link organization -> Organization;
