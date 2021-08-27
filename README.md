@@ -1,8 +1,8 @@
 # perfect-stack
 The perfect stack is comprised of three main technologies:
-- DB: EdgeDB
-- Imba : as the programming language with an integrated UI library
-- Inertia: a glue between the UI and the server.
+- [EdgeDB](https://edgedb.com): the database
+- [Imba](https://imba.io/) : as the programming language with an integrated UI library
+- [Inertia](https://inertiajs.com): a glue between the UI and the server.
 - http library: I used express, but I intend to move to Fastify later. You can use the one you prefer here.
 
 These technologies together make the stack perfect in my opinion. They are:
