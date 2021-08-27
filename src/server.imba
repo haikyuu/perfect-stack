@@ -1,5 +1,5 @@
+import ContactsController from './controllers/ContactsController'
 import express from 'express'
-import edgedb from 'edgedb'
 
 import inertia from './inertia-express/inertia'
 import flash from './inertia-express/flash'
@@ -59,6 +59,7 @@ def createServer
 
 	# routes that require logic go here
 	server.use "/organizations", OrganizationsController!
+	server.use "/contacts", ContactsController!
 
 	# dashboard page
 	server.use "/", do(req, res)

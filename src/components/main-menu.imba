@@ -15,7 +15,7 @@ tag menu-link < inertia-link
 const menuItems = [
 	{icon:"dashboard", href:"/" ,url:"", label:"Dashboard"}
 	{icon:"office", href:"/organizations" ,url:"organizations", label:"Organizations"}
-	{icon:"users", href:"/contacts" ,url:"contacts", label:"Users"}
+	{icon:"users", href:"/contacts" ,url:"contacts", label:"Contacts"}
 	{icon:"printer", href:"/reports" ,url:"reports", label:"Reports"}
 ]		
 tag main-menu

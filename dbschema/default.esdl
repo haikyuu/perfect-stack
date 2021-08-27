@@ -47,6 +47,7 @@ module default {
 		required property last_name -> str {
 			constraint min_len_value(3);
 		};
+		property name := .first_name ++ ' ' ++ .last_name;
 		property email -> str;
 		property phone -> str;
 		property address -> str;

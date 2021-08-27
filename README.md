@@ -34,7 +34,7 @@ If you add some tailwindcss classes, make sure you run `npm run tailwind` to bui
 - [ ] Complete Ping CRM functionality
   - [ ] Manage Contacts
   - [ ] Manage users (contains file upload)
-- [ ] Polish the API of inertia adapters for Imba
+- [ ] Polish the API of inertia adapter for Imba
 - [ ] Extract useful Imba components (e.g: portal)
 - [ ] Polish the API of inertia express adapter
 - [ ] Add unit tests
