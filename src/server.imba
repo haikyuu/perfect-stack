@@ -10,56 +10,62 @@ import index from './index.html'
 import UserController from './controllers/UserController'
 import LoginController from './controllers/LoginController'
 import OrganizationsController from './controllers/OrganizationsController'
+import {initDatabase} from './services/db'
 
-const server = express!
-server.use bodyParser.json!
+def createServer
+	const closeDatabasePool = await initDatabase!
 
-# Session middleware setup
-const sessionOptions = 
-	secret: "not so secret"
-	cookie : {}
+	const server = express!
+	server.use bodyParser.json!
 
-if server.get('env') === 'production'
-	server.set 'trust proxy', 1
-	sessionOptions.cookie.secure = true # serve secure cookies
+	# Session middleware setup
+	const sessionOptions = 
+		secret: "not so secret"
+		cookie : {}
 
-server.use session(sessionOptions)
-server.use flash!
+	if server.get('env') === 'production'
+		server.set 'trust proxy', 1
+		sessionOptions.cookie.secure = true # serve secure cookies
 
-# Add Inertia middleware
-const ASSET_VERSION = "1"
-def _html pageObject, viewData
-	String index.body.replace ",,,", JSON.stringify pageObject
+	server.use session(sessionOptions)
+	server.use flash!
 
-
-server.use inertia
-	version: ASSET_VERSION
-	html: _html
-	# @ts-ignore
-	flashMessages: do(req) req.flash.flashAll!
+	# Add Inertia middleware
+	const ASSET_VERSION = "1"
+	def _html pageObject, viewData
+		String index.body.replace ",,,", JSON.stringify pageObject
 
 
-server.use "/login", LoginController!
-
-# auth middleware
-server.use do(req, res, next)
-	const {user} = req.session
-	if user
-		req.Inertia.shareProps
-			auth:
-				user: user
-			requestId:
-				Math.random()
-		return next!
-	req.Inertia.redirect "/login"
-
-# routes that require logic go here
-server.use "/organizations", OrganizationsController!
-
-# dashboard page
-server.use "/", do(req, res)
-	req.Inertia.render 
-		component: "dashboard-page"
+	server.use inertia
+		version: ASSET_VERSION
+		html: _html
+		# @ts-ignore
+		flashMessages: do(req) req.flash.flashAll!
 
 
-imba.serve server.listen process.env.PORT or 3000
+	server.use "/login", LoginController!
+
+	# auth middleware
+	server.use do(req, res, next)
+		const {user} = req.session
+		if user
+			req.Inertia.shareProps
+				auth:
+					user: user
+				requestId:
+					Math.random()
+			return next!
+		req.Inertia.redirect "/login"
+
+	# routes that require logic go here
+	server.use "/organizations", OrganizationsController!
+
+	# dashboard page
+	server.use "/", do(req, res)
+		req.Inertia.render 
+			component: "dashboard-page"
+
+
+	imba.serve server.listen process.env.PORT or 3000
+
+createServer!

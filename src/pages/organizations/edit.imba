@@ -4,7 +4,6 @@ import {Inertia} from "@inertiajs/inertia"
 tag edit-organizations-page
 	prop props
 	def setup
-		console.log props
 		const {name = "", email = "", phone = "", address = "", city = "", region = "", country = "", postal_code = ""} = props.props.organization;
 		self.form = new Form
 			name: name
