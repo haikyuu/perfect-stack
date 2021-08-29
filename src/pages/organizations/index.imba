@@ -1,4 +1,4 @@
-import Form from '../../inertia/Form'
+import { Form } from 'imba-inertia-adapter'
 
 tag organizations-page
 	prop props

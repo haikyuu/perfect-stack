@@ -1,4 +1,4 @@
-import {createInertiaApp} from './inertia/index'
+import {createInertiaApp} from 'imba-inertia-adapter'
 
 import './pages/index'
 import './components/index'

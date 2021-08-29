@@ -29,11 +29,13 @@
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "concurrently": "^6.2.1",
+    "debug": "^4.3.2",
     "edgedb": "^0.15.2",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
     "express-session": "^1.17.2",
     "imba": "^2.0.0-alpha.165",
+    "imba-inertia-adapter": "^2.0.0-alpha.3",
     "lodash": "^4.17.21",
     "multer": "^1.4.3"
   },

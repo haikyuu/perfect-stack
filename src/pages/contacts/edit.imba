@@ -1,4 +1,4 @@
-import Form from '../../inertia/Form'
+import { Form } from 'imba-inertia-adapter'
 import {Inertia} from "@inertiajs/inertia"
 
 tag edit-contacts-page
