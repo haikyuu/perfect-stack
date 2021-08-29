@@ -15,7 +15,7 @@ These technologies together make the stack perfect in my opinion. They are:
 https://demo.inertiajs.com
 
 
-Included in this repo is an inertia adapter for Imba as well as an inertia adapter for express I forked from https://github.com/jordankaerim/inertia-node to add support for flash messages.
+Included in this repo: an inertia adapter for express I forked from https://github.com/jordankaerim/inertia-node to add support for flash messages.
 
 ## Installation
 - Install [edgedb](https://www.edgedb.com/docs/quickstart)
@@ -36,9 +36,9 @@ If you add some tailwindcss classes, make sure you run `npm run tailwind` to bui
     - Search and filter
   - Manage Users (with file upload)
   - Manage Contacts
+- Polish the API of inertia adapter for Imba and publish to [npm](https://github.com/haikyuu/imba-inertia-adapter)
 
 # Roadmap
-- [ ] Polish the API of inertia adapter for Imba and publish to npm
 - [ ] Polish the API of inertia express adapter and publish to npm
 - [ ] Add some tests
 - [ ] Deploy to the cloud
