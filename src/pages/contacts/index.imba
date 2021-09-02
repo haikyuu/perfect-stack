@@ -37,7 +37,7 @@ tag contacts-page
 						
 					
 					<inertia-link .btn-indigo href="/contacts/create">
-						<span> "Create"
+						<span> "Create "
 						<span .hidden.{'md:inline'}> "Contact"
 					
 				

@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"npm:server\" \"npm:tailwind-watch\"",
     "server": "imba -w src/server.imba",
+    "f": "imba -w src/fastify_server.imba",
     "tailwind-watch": "tailwindcss -i tailwind/app.css -o src/index.css --watch",
     "tailwind": "tailwindcss -i tailwind/app.css -o src/index.css",
     "seed": "edgedb query --file=dbschema/seeds/initial.edgeql",
@@ -23,7 +24,10 @@
   },
   "homepage": "https://github.com/haikyuu/perfect-stack#readme",
   "dependencies": {
+    "@fastify/session": "^6.1.1",
     "@inertiajs/inertia": "^0.10.1",
+    "@mgcrea/fastify-request-logger": "^0.5.2",
+    "@mgcrea/pino-pretty-compact": "^0.5.0",
     "@types/express-session": "^1.17.4",
     "@types/lodash": "^4.14.172",
     "bcrypt": "^5.0.1",
@@ -34,14 +38,21 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
     "express-session": "^1.17.2",
-    "imba": "^2.0.0-alpha.165",
+    "fastify": "^3.20.2",
+    "fastify-cookie": "^5.3.1",
+    "fastify-flash": "^2.0.2",
+    "fastify-plugin": "^3.0.0",
+    "fastify-secure-session": "^2.3.1",
+    "imba": "latest",
     "imba-inertia-adapter": "^2.0.0-alpha.3",
     "lodash": "^4.17.21",
+    "middie": "^5.3.0",
     "multer": "^1.4.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.2",
     "postcss": "^8.3.6",
+    "prettier": "2.3.2",
     "tailwindcss": "^2.2.7"
   }
 }

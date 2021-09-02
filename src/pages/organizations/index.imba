@@ -37,7 +37,7 @@ tag organizations-page
 						
 					
 					<inertia-link .btn-indigo href="/organizations/create">
-						<span> "Create"
+						<span> "Create "
 						<span .hidden.{'md:inline'}> "Organization"
 					
 				

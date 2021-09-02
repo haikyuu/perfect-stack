@@ -1,20 +1,19 @@
 import {checkPassword} from '../services/auth'
-import express from 'express'
 import edgedb from 'edgedb'
+import {FastifyInstance} from 'fastify'
 
-export default def LoginController
-	let router = express.Router!
-
+export default def LoginController(router\FastifyInstance, options, done)
 	router.get "/" do(req, res)
 		req.Inertia.render 
 			component: "login-page"
 
 	router.delete "/" do(req, res)
-		req.session.user = null
+		req.session.set("user", null)
 		req.Inertia.redirect "/"
 
 	router.post "/" do(req, res)
 		const {body} = req
+		console.log body
 		const conn = await edgedb!
 		try
 			const user = await conn.querySingle\<{id:string, owner:boolean, password:string, first_name:string, last_name:string}> `
@@ -29,7 +28,7 @@ export default def LoginController
 					owner: user.owner
 					first_name: user.first_name
 					last_name: user.last_name
-				req.session.user = sessionUser
+				req.session.set 'user', sessionUser
 				return req.Inertia.redirect "/"
 		catch error
 			console.log "login", error.message
@@ -40,4 +39,4 @@ export default def LoginController
 				errors: 
 					email: "These credentials do not match our records."
 
-	return router
+	done!
