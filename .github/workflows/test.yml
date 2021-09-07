@@ -15,7 +15,7 @@ jobs:
       matrix:
         node-version: ["14"]
         os: [ubuntu-latest]
-        edgedb-version: ["1.0.0-beta.3"]
+        edgedb-version: ["stable"]
 
         # include:
         #   - os: macos-latest
