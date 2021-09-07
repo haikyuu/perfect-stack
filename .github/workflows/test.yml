@@ -38,11 +38,11 @@ jobs:
           server-version: ${{ matrix.edgedb-version }}
       - name: create run state dir
         run: |
-          mkdir edgedb_run_state_dir
+          mkdir /home/runner/.local/ed
 
       - name: Install deps
         env: 
-          XDG_RUNTIME_DIR: ${{ github.workspace }}/edgedb_run_state_dir
+          XDG_RUNTIME_DIR: /home/runner/.local/ed
         run: |
           npm ci
           edgedb project init --non-interactive
