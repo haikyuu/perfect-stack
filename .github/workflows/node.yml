@@ -60,7 +60,7 @@ jobs:
           npm ci
       - name: Build the project
         run: |
-          npm run Build
+          npm run build
       - name: Run Tests
         run: |
           npm run test
