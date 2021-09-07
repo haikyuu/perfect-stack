@@ -101,20 +101,24 @@ class Organization
 		console.timeEnd("create org")
 	def getMultiple userId\string, search\string, trashed\string, page\number, limit\number
 		console.time("get multiple orgs")
+		let offset = (+page - 1) * limit;
+		const args = {
+			userId,
+			offset,
+			limit,
+		}
+
 		let filterQuery = 'NOT EXISTS Organization.deleted_at'
 		if trashed === "Only Trashed"
 			filterQuery = `EXISTS Organization.deleted_at`
 		else if trashed === "With Trashed"
 			filterQuery = `TRUE`
-
 		
-		let offset = (+page - 1) * limit;
-		const args = {
-			userId,
-			search,
-			offset,
-			limit,
-		}
+		if search
+			filterQuery += "AND contains( str_lower(Organization.name), str_lower(<str>$search) )"
+			args.search = search
+		
+		console.log filterQuery
 		const result = await db.query `
 			WITH orgs := 
 				(
@@ -123,8 +127,7 @@ class Organization
 								SELECT User FILTER
 									User.id = <uuid>$userId AND
 									NOT EXISTS .deleted_at
-								) AND 
-							contains( str_lower(Organization.name), str_lower(<str>$search) ) AND
+								)  AND
 							{filterQuery}
 				)
 			SELECT \{
@@ -140,6 +143,7 @@ class Organization
 			}
 		`, args
 		const [{organizations, total}] = result
+		console.log result
 		console.timeEnd("get multiple orgs")
 		return {organizations, total}
 

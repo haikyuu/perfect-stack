@@ -1,0 +1,1 @@
+edgedb database create test;
