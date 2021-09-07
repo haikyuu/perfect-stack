@@ -4,12 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "edgedb query --file=dbschema/seeds/initial.edgeql",
+    "test:seed": "EDGEDB_DATABASE=test edgedb query --file=dbschema/seeds/test.edgeql",
+    "migrate": "edgedb migrate",
+    "test:migrate": "(./dbschema/setup_test_db.sh || true) && EDGEDB_DATABASE=test edgedb migrate",
+    "start-for-test": "EDGEDB_DATABASE=test PORT=3003 imba src/server.imba",
+    "test:headed": "playwright test --headed",
+    "test": "playwright test",
+    "test:codegen": "npx playwright codegen http://localhost:3003",
+    "codegen": "concurrently \"npm:start-for-test\" \"npm:test:codegen\"",
     "start": "concurrently \"npm:server\" \"npm:tailwind-watch\"",
     "server": "imba -w src/server.imba",
     "tailwind-watch": "tailwindcss -i tailwind/app.css -o src/index.css --watch",
     "tailwind": "tailwindcss -i tailwind/app.css -o src/index.css",
-    "seed": "edgedb query --file=dbschema/seeds/initial.edgeql",
     "build": "npm run tailwind && imba build src/server.imba"
   },
   "repository": {
@@ -37,9 +44,11 @@
     "imba": "^2.0.0-alpha.165",
     "imba-inertia-adapter": "^2.0.0-alpha.3",
     "lodash": "^4.17.21",
-    "multer": "^1.4.3"
+    "multer": "^1.4.3",
+    "typescript": "4.3.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.14.1",
     "autoprefixer": "^10.3.2",
     "postcss": "^8.3.6",
     "tailwindcss": "^2.2.7"

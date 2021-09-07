@@ -11,21 +11,32 @@ export default def OrganizationsController
 		const {search = "", trashed,} = query
 		const page = +query.page or 1
 		const limit = 10;
-		const {organizations,total} = await Org.getMultiple 
-			req.session.user.id,
-			"{search}",
-			"{trashed}",
-			page,
-			limit
-		const paginationData = getPaginationData
-			{data: organizations, total, limit, query, url: "/organizations", page}
-		req.Inertia.render
-			component: "organizations-page"
-			props:
-				filters: 
-					search: search
-					trashed: trashed
-				organizations: paginationData
+		try
+			const {organizations,total} = await Org.getMultiple 
+				req.session.user.id,
+				"{search}",
+				"{trashed}",
+				page,
+				limit
+			const paginationData = getPaginationData
+				{data: organizations, total, limit, query, url: "/organizations", page}
+			req.Inertia.render
+				component: "organizations-page"
+				props:
+					filters: 
+						search: search
+						trashed: trashed
+					organizations: paginationData
+		catch error
+			console.log error
+			req.flash.setFlashMessage "error", "Error getting organization: {error}"
+			req.Inertia.render
+				component: "organizations-page"
+				props:
+					filters: 
+						search: search
+						trashed: trashed
+					organizations: []
 
 	router.get "/create" do(req, res)
 		req.Inertia.render

@@ -2,5 +2,6 @@
 	"workbench.colorCustomizations": {
 		"editor.lineHighlightBackground": "#1073cf2d",
 		"editor.lineHighlightBorder": "#9fced11f"
-	}
+	},
+	"typescript.tsdk": "node_modules/typescript/lib"
 }

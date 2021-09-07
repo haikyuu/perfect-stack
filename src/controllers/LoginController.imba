@@ -1,6 +1,6 @@
 import {checkPassword} from '../services/auth'
 import express from 'express'
-import edgedb from 'edgedb'
+import {db} from '../services/db'
 
 export default def LoginController
 	let router = express.Router!
@@ -15,9 +15,8 @@ export default def LoginController
 
 	router.post "/" do(req, res)
 		const {body} = req
-		const conn = await edgedb!
 		try
-			const user = await conn.querySingle\<{id:string, owner:boolean, password:string, first_name:string, last_name:string}> `
+			const user = await db.querySingle\<{id:string, owner:boolean, password:string, first_name:string, last_name:string}> `
 				SELECT User \{ id, owner, password, first_name, last_name \} 
 					FILTER
 						NOT EXISTS .deleted_at AND
