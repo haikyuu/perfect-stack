@@ -38,7 +38,7 @@ jobs:
           server-version: ${{ matrix.edgedb-version }}
       - name: create run state dir
         run: |
-          mkdir /home/runner/.local/ed
+          mkdir -p /home/runner/.local/ed
 
       - name: Install deps
         env: 
