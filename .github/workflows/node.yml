@@ -45,6 +45,7 @@ jobs:
           npm ci
 
       - name: Init edgedb project and run migrations
+        run:  |
           edgedb project init --non-interactive
           npm run test:migrate
 
