@@ -46,13 +46,15 @@ jobs:
         run: |
           npm ci
           edgedb project init --non-interactive
-
-      - name: Run migrations
-        run: npm run test:migrate
-
-      - name: Build the project
-        run: |
+          npm run test:migrate
           npm run build
-      - name: Run Tests
-        run: |
           npm run test
+      # - name: Run migrations
+      #   run: npm run test:migrate
+
+      # - name: Build the project
+      #   run: |
+      #     npm run build
+      # - name: Run Tests
+      #   run: |
+      #     npm run test
