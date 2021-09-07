@@ -17,10 +17,10 @@ jobs:
         os: [ubuntu-latest]
         edgedb-version: ["stable"]
 
-        include:
-          - os: macos-latest
-            node-version: "14"
-            edgedb-version: "stable"
+        # include:
+        #   - os: macos-latest
+        #     node-version: "14"
+        #     edgedb-version: "stable"
 
     steps:
       - uses: actions/checkout@v1
