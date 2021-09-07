@@ -36,10 +36,13 @@ jobs:
         uses: edgedb/setup-edgedb@v1
         with:
           server-version: ${{ matrix.edgedb-version }}
+      - name: create run state dir
+        run: |
+          mkdir edgedb_run_state_dir
 
       - name: Install deps
         env: 
-          XDG_RUNTIME_DIR: ${{ runner.temp }}/edgedb
+          XDG_RUNTIME_DIR: ./edgedb_run_state_dir
         run: |
           npm ci
           edgedb project init --non-interactive
