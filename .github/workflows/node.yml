@@ -1,4 +1,6 @@
 name: Tests
+env:
+  XDG_RUNTIME_DIR: "${{ runner.temp }}/edgedb"
 
 on:
   push:
