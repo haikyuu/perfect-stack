@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - setup-ci
   pull_request:
     branches:
       - main
@@ -12,6 +11,8 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    env: 
+      XDG_RUNTIME_DIR: "${{ runner.temp }}/edgedb"
     strategy:
       matrix:
         node-version: ["14"]
