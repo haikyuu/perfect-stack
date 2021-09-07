@@ -15,7 +15,7 @@ jobs:
       matrix:
         node-version: ["14"]
         os: [ubuntu-latest]
-        edgedb-version: ["stable"]
+        edgedb-version: ["1.0.0-beta.3"]
 
         # include:
         #   - os: macos-latest
@@ -46,7 +46,9 @@ jobs:
         run: |
           npm ci
           edgedb project init --non-interactive
-          npm run test:migrate
+
+      - name: Run migrations
+        run: npm run test:migrate
 
       - name: Build the project
         run: |
