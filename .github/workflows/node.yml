@@ -58,7 +58,7 @@ jobs:
       - name: Install deps
         run: |
           npm ci
-          edgedb project init
+          edgedb project init --non-interactive
 
       - name: Build the project
         run: |
