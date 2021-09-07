@@ -12,8 +12,6 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
-    env:
-      XDG_RUNTIME_DIR: "${{ runner.temp }}/edgedb"
     strategy:
       matrix:
         node-version: ["14"]
@@ -43,16 +41,12 @@ jobs:
       - name: Install deps
         run: |
           npm ci
-
-      - name: Init edgedb project and run migrations
-        run: |
           edgedb project init --non-interactive
           npm run test:migrate
 
       - name: Build the project
         run: |
           npm run build
-
       - name: Run Tests
         run: |
           npm run test
