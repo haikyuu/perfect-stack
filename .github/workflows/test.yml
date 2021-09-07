@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - ci
+      - setup-ci
   pull_request:
     branches:
       - main
