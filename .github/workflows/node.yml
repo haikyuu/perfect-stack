@@ -20,24 +20,7 @@ jobs:
         os: [ubuntu-latest]
         edgedb-version: ["stable"]
 
-        # include:
-        #   - os: macos-latest
-        #     node-version: "14"
-        #     edgedb-version: "stable"
-          # - os: windows-latest
-          #   node-version: "14"
-          #   edgedb-version: "stable"
-
     steps:
-      # - name: Setup WSL
-      #   if: ${{ matrix.os == 'windows-latest' }}
-      #   uses: vampire/setup-wsl@v1
-      #   with:
-      #     wsl-shell-user: edgedb
-      #     additional-packages:
-      #       ca-certificates
-      #       curl
-
       - uses: actions/checkout@v1
         with:
           fetch-depth: 50
@@ -46,11 +29,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-
-      # - name: Set up Deno
-      #   uses: denoland/setup-deno@v1
-      #   with:
-      #     deno-version: v1.12.x
 
       - name: Install EdgeDB
         uses: edgedb/setup-edgedb@v1
