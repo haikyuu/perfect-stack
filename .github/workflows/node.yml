@@ -58,6 +58,8 @@ jobs:
       - name: Install deps
         run: |
           npm ci
+          edgedb project init
+
       - name: Build the project
         run: |
           npm run build
