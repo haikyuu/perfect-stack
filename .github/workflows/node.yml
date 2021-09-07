@@ -60,7 +60,10 @@ jobs:
       - name: Install deps
         run: |
           npm ci
+
+      - name: Init edgedb project and run migrations
           edgedb project init --non-interactive
+          npm run test:migrate
 
       - name: Build the project
         run: |
