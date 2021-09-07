@@ -1,6 +1,5 @@
 name: Tests
-env:
-  XDG_RUNTIME_DIR: "${{ runner.temp }}/edgedb"
+
 
 on:
   push:
@@ -14,6 +13,8 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    env:
+      XDG_RUNTIME_DIR: "${{ runner.temp }}/edgedb"
     strategy:
       matrix:
         node-version: ["14"]
