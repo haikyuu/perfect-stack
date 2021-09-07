@@ -42,7 +42,7 @@ jobs:
 
       - name: Install deps
         env: 
-          XDG_RUNTIME_DIR: ./edgedb_run_state_dir
+          XDG_RUNTIME_DIR: ${{ github.workspace }}/edgedb_run_state_dir
         run: |
           npm ci
           edgedb project init --non-interactive
