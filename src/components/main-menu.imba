@@ -1,17 +1,3 @@
-tag menu-link < inertia-link
-	prop icon\string
-	prop url\string
-	constructor ...props
-		super props
-	
-
-	def render
-		const isCurrentUrl = isUrl url
-		<self[cursor:pointer] href=href .flex.items-center.group.py-3.mb-4>
-			<icon name=icon .w-4.h-4.mr-2 .fill-white=isCurrentUrl .fill-indigo-400=!isCurrentUrl .{"group-hover:fill-white"}=!isCurrentUrl>
-			<div .text-white=isCurrentUrl .text-indigo-300=!isCurrentUrl .{"group-hover:text-white"}=!isCurrentUrl>
-				<slot>
-
 const menuItems = [
 	{icon:"dashboard", href:"/" ,url:"", label:"Dashboard"}
 	{icon:"office", href:"/organizations" ,url:"organizations", label:"Organizations"}

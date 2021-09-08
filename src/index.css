@@ -785,6 +785,10 @@ video {
   color: rgba(185, 28, 28, var(--tw-text-opacity));
 }
 
+.absolute {
+  position: absolute;
+}
+
 .relative {
   position: relative;
 }

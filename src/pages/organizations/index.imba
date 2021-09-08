@@ -28,7 +28,7 @@ tag organizations-page
 			<page-layout>
 				<h1 .mb-8.font-bold.text-3xl> "Organizations"
 				<div .mb-6.flex.justify-between.items-center>
-					<search-filter filter=form.data.trashed bind=form.data.search .w-full.max-w-md.mr-4 reset=onResetCreator(form) _change=onChangeCreator(form)>
+					<search-filter filter=form.data.trashed bind=form.data.search .max-w-md reset=onResetCreator(form) _change=onChangeCreator(form)>
 						<label[ta:start] .block.text-gray-700> "Trashed:"
 						<select bind=form.data.trashed @change=onChange(form) .mt-1.w-full.form-select>
 							<option value="">
