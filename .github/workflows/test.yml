@@ -32,6 +32,15 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Cache .pnpm-store
+        uses: actions/cache@v1
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      - name: Install pnpm
+        run: curl -f https://get.pnpm.io/v6.14.js | node - add --global pnpm@6
+
       - name: Install EdgeDB
         uses: edgedb/setup-edgedb@v1
         with:
@@ -44,7 +53,7 @@ jobs:
         env: 
           XDG_RUNTIME_DIR: /home/runner/.local/ed
         run: |
-          npm ci
+          pnpm install
           edgedb project init --non-interactive
           npm run test:migrate
           npm run build
