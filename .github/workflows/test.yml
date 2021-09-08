@@ -54,6 +54,11 @@ jobs:
           XDG_RUNTIME_DIR: /home/runner/.local/ed
         run: |
           pnpm install
+
+      - name: Setup Edgedb
+        env: 
+          XDG_RUNTIME_DIR: /home/runner/.local/ed
+        run: |
           edgedb project init --non-interactive
           npm run test:migrate
           npm run build
