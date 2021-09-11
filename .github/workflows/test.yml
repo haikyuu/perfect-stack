@@ -1,0 +1,74 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: ["14"]
+        os: [ubuntu-latest]
+        edgedb-version: ["stable"]
+
+        # include:
+        #   - os: macos-latest
+        #     node-version: "14"
+        #     edgedb-version: "stable"
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 50
+
+      - name: Set up Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache .pnpm-store
+        uses: actions/cache@v1
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      - name: Install pnpm
+        run: curl -f https://get.pnpm.io/v6.14.js | node - add --global pnpm@6
+
+      - name: Install EdgeDB
+        uses: edgedb/setup-edgedb@v1
+        with:
+          server-version: ${{ matrix.edgedb-version }}
+      - name: create run state dir
+        run: |
+          mkdir -p /home/runner/.local/ed
+
+      - name: Install deps
+        env: 
+          XDG_RUNTIME_DIR: /home/runner/.local/ed
+        run: |
+          pnpm install
+
+      - name: Setup Edgedb
+        env: 
+          XDG_RUNTIME_DIR: /home/runner/.local/ed
+        run: |
+          edgedb project init --non-interactive
+          npm run test:migrate
+          npm run build
+          npm run test
+      # - name: Run migrations
+      #   run: npm run test:migrate
+
+      # - name: Build the project
+      #   run: |
+      #     npm run build
+      # - name: Run Tests
+      #   run: |
+      #     npm run test

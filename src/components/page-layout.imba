@@ -2,7 +2,7 @@ tag page-layout
 	def render
 		const user = #context.currentPage.page.props.auth.user
 		<self>
-			<div id="dropdown">
+			<div[zi:20] id="dropdown">
 			<div .{'md:flex'}.{'md:flex-col'}>
 				<div .{'md:h-screen'}.{'md:flex'}.{'md:flex-col'}>
 					<div .{'md:flex'}.{'md:flex-shrink-0'}>
@@ -14,7 +14,7 @@ tag page-layout
 								<svg .fill-white.w-6.h-6 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
 									<path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
 								
-								<div slot="dropdown" .mt-2.px-8.py-4.shadow-lg.bg-indigo-800.rounded>
+								<div slot="dropdown" .px-8.py-4.shadow-lg.bg-indigo-800.rounded>
 									<main-menu />
 								
 							
@@ -29,7 +29,7 @@ tag page-layout
 									
 									<icon .w-5.h-5.{'group-hover:fill-indigo-600'}.fill-gray-700.{'focus:fill-indigo-600'} name="cheveron-down" />
 								
-								<div slot="dropdown" .mt-2.py-2.shadow-xl.bg-white.rounded.text-sm>
+								<div slot="dropdown" .py-2.shadow-xl.bg-white.rounded.text-sm>
 									<inertia-link[ta:start] .block.px-6.py-2.{'hover:bg-indigo-500'}.{'hover:text-white'} href="/users/{user.id}/edit"> "My Profile"
 									<inertia-link .block.px-6.py-2.{'hover:bg-indigo-500'}.{'hover:text-white'} href="/users"> "Manage Users"
 									<inertia-button-link .block.px-6.py-2.{'hover:bg-indigo-500'}.{'hover:text-white'}.w-full.text-left href="/login" method="delete"> "Logout"
