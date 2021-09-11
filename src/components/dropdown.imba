@@ -27,12 +27,12 @@ tag dropdown
 				<slot />
 				if isShown?
 					<teleport to="#dropdown">
-						<div>
-							<div[pos:fixed t:0 r:0 l:0 b:0 z:99998 bg:black/20%] @click.stop=hide >
+						<div[ease:75ms ease@out:ease-out ease@in:ease-in opacity@off:0 ] ease>
+							<div[pos:fixed t:0 r:0 l:0 b:0 z:99998 bg:black/20% ] @click.stop=hide >
 							<div[pos:relative zi:99999] @click.stop={dropDownClick}>
 								const top = rectangle.bottom
 								const left = rectangle.left
-								<div[pos:absolute top:{top} left:{left}]
-								 style="top: {top}; left: {left};"
+								<div[pos:absolute top:{top} left:{left} scale@off:0.9]
+								 style="top: {top}; left: {left};" 
 								 >
 									<slot name="dropdown">

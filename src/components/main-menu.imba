@@ -6,6 +6,7 @@ const menuItems = [
 ]		
 tag main-menu
 	def isUrl ...urls
+		return false
 		let currentUrl = #context.currentPage.page.url.substr 1
 		if (urls[0] === '')
 			return currentUrl === ''

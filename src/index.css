@@ -785,14 +785,6 @@ video {
   color: rgba(185, 28, 28, var(--tw-text-opacity));
 }
 
-.absolute {
-  position: absolute;
-}
-
-.relative {
-  position: relative;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -860,10 +852,6 @@ video {
 
 .mb-4 {
   margin-bottom: 1rem;
-}
-
-.mt-2 {
-  margin-top: 0.5rem;
 }
 
 .-mb-1 {
@@ -1374,6 +1362,10 @@ video {
 
 .filter {
   filter: var(--tw-filter);
+}
+
+.ease-in {
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
 
 input:focus, input:active, select:focus, select:active, textarea:focus, textarea:active, button:focus, button:active, div:focus, div:active, a:focus, a:active {
