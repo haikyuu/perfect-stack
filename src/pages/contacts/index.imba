@@ -3,7 +3,7 @@ import { Form } from 'imba-inertia-adapter'
 tag contacts-page
 	prop props
 	def setup
-		const {filters, contacts} = props.props
+		const {filters, contacts} = props
 		form = new Form
 			search: filters.search
 			trashed: filters.trashed
@@ -22,7 +22,7 @@ tag contacts-page
 			form.data.trashed = ""
 			onChange form
 	def render
-		const {contacts} = props.props
+		const {contacts} = props
 		const {links} = contacts
 		<self>
 			<page-layout>

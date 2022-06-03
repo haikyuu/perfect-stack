@@ -40,7 +40,7 @@ tag create-contacts-page
 								<option value="NOR"> "Norway"
 							<select-input bind=form.data.organization error=form.errors.country .pr-6.pb-8.w-full.{'lg:w-1/2'} label="Organization">
 								<option value=""> ""
-								for org in props.props.organizations
+								for org in props.organizations
 									<option value=org.id> org.name		
 							<text-input bind=form.data.postal_code error=form.errors.postal_code .pr-6.pb-8.w-full.{'lg:w-1/2'} label="Postal code">
 						

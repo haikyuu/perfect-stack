@@ -4,7 +4,7 @@ import {Inertia} from "@inertiajs/inertia"
 tag edit-users-page
 	prop props
 	def setup
-		const {first_name = "", last_name = "", email = "", password = "", photo_path = "", owner = "false"} = props.props.user;
+		const {first_name = "", last_name = "", email = "", password = "", photo_path = "", owner = "false"} = props.user;
 		self.form = new Form
 			first_name: first_name
 			last_name: last_name
@@ -14,23 +14,23 @@ tag edit-users-page
 			owner: owner
 	def destroy
 		if window.confirm 'Are you sure you want to delete this user?'
-			Inertia.delete "/users/{props.props.user.id}"
+			Inertia.delete "/users/{props.user.id}"
 
 	def createRestore Inertia
 		do() restore Inertia
 	def restore Inertia
 		if window.confirm 'Are you sure you want to restore this user?' 
 			console.log "restoring"
-			Inertia.put "/users/{props.props.user.id}/restore"
+			Inertia.put "/users/{props.user.id}/restore"
 	def render
-		const {user} = props.props
+		const {user} = props
 		const contacts = user.contacts or []
 		<self>
 			<page-layout>
 				<h1 .mb-8.font-bold.text-3xl>
 					<inertia-link .text-indigo-400.{'hover:text-indigo-600'} href="/users"> "Users"
 					<span .text-indigo-400.font-medium> "/"
-					props.props.user.name
+					props.user.name
 				
 				if user.deleted_at	
 					<trashed-message .mb-6 restore=createRestore(Inertia)> "This user has been deleted."

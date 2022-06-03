@@ -3,7 +3,7 @@ import { Form } from 'imba-inertia-adapter'
 tag organizations-page
 	prop props
 	def setup
-		const {filters, organizations} = props.props
+		const {filters, organizations} = props
 		form = new Form
 			search: filters.search
 			trashed: filters.trashed
@@ -22,7 +22,7 @@ tag organizations-page
 			form.data.trashed = ""
 			onChange form
 	def render
-		const {organizations} = props.props
+		const {organizations} = props
 		const {links} = organizations
 		<self>
 			<page-layout>

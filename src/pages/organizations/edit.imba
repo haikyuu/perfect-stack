@@ -4,7 +4,7 @@ import {Inertia} from "@inertiajs/inertia"
 tag edit-organizations-page
 	prop props
 	def setup
-		const {name = "", email = "", phone = "", address = "", city = "", region = "", country = "", postal_code = ""} = props.props.organization;
+		const {name = "", email = "", phone = "", address = "", city = "", region = "", country = "", postal_code = ""} = props.organization;
 		self.form = new Form
 			name: name
 			email: email
@@ -16,16 +16,16 @@ tag edit-organizations-page
 			postal_code: postal_code
 	def destroy
 		if window.confirm 'Are you sure you want to delete this organization?'
-			Inertia.delete "/organizations/{props.props.organization.id}"
+			Inertia.delete "/organizations/{props.organization.id}"
 
 	def createRestore Inertia
 		do() restore Inertia
 	def restore Inertia
 		if window.confirm 'Are you sure you want to restore this organization?' 
 			console.log "restoring"
-			Inertia.put "/organizations/{props.props.organization.id}/restore"
+			Inertia.put "/organizations/{props.organization.id}/restore"
 	def render
-		const {organization} = props.props
+		const {organization} = props
 		const contacts = organization.contacts or []
 		<self>
 			<page-layout>

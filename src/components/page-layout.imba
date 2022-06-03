@@ -15,7 +15,7 @@ tag page-layout
 									<path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
 								
 								<div slot="dropdown" .mt-2.px-8.py-4.shadow-lg.bg-indigo-800.rounded>
-									<main-menu />
+								# <main-menu />
 								
 							
 						

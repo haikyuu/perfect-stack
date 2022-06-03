@@ -4,7 +4,7 @@ import {Inertia} from "@inertiajs/inertia"
 tag edit-contacts-page
 	prop props
 	def setup
-		const {last_name = "", first_name = "", email = "", phone = "", address = "", city = "", region = "", country = "", postal_code = "", organization} = props.props.contact;
+		const {last_name = "", first_name = "", email = "", phone = "", address = "", city = "", region = "", country = "", postal_code = "", organization} = props.contact;
 		self.form = new Form
 			first_name: first_name
 			last_name: last_name
@@ -18,23 +18,23 @@ tag edit-contacts-page
 			organization: organization.id
 	def destroy
 		if window.confirm 'Are you sure you want to delete this contact?'
-			Inertia.delete "/contacts/{props.props.contact.id}"
+			Inertia.delete "/contacts/{props.contact.id}"
 
 	def createRestore Inertia
 		do() restore Inertia
 	def restore Inertia
 		if window.confirm 'Are you sure you want to restore this contact?' 
 			console.log "restoring"
-			Inertia.put "/contacts/{props.props.contact.id}/restore"
+			Inertia.put "/contacts/{props.contact.id}/restore"
 	def render
-		const {contact} = props.props
+		const {contact} = props
 		const contacts = contact.contacts or []
 		<self>
 			<page-layout>
 				<h1 .mb-8.font-bold.text-3xl>
 					<inertia-link .text-indigo-400.{'hover:text-indigo-600'} href="/contacts"> "Contacts"
 					<span .text-indigo-400.font-medium> "/"
-					props.props.contact.name
+					props.contact.name
 				
 				if contact.deleted_at	
 					<trashed-message .mb-6 restore=createRestore(Inertia)> "This contact has been deleted."
@@ -54,7 +54,7 @@ tag edit-contacts-page
 								<option value="MA"> "Morocco"
 								<option value="NOR"> "Norway"
 							<select-input bind=form.data.organization error=form.errors.country .pr-6.pb-8.w-full.{'lg:w-1/2'} label="Organization">
-								for org in props.props.organizations
+								for org in props.organizations
 									<option value=org.id> org.name	
 							<text-input bind=form.data.postal_code error=form.errors.postal_code .pr-6.pb-8.w-full.{'lg:w-1/2'} label="Postal code">
 						

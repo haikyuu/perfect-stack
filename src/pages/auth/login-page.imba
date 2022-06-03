@@ -2,7 +2,7 @@ import { Form } from 'imba-inertia-adapter'
 
 tag login-page
 	def setup
-		console.log "props", self.props.props
+		console.log "props", self.props
 		self.form = new Form
 			email: 'mail@mail.com'
 			password: 'password'
