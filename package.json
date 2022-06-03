@@ -14,6 +14,7 @@
     "test:codegen": "npx playwright codegen http://localhost:3003",
     "codegen": "concurrently \"npm:start-for-test\" \"npm:test:codegen\"",
     "start": "concurrently \"npm:server\" \"npm:tailwind-watch\"",
+    "start:instance": "edgedb instance start perfect_stack",
     "server": "imba -w src/server.imba",
     "tailwind-watch": "tailwindcss -i tailwind/app.css -o src/index.css --watch",
     "tailwind": "tailwindcss -i tailwind/app.css -o src/index.css",
@@ -44,7 +45,7 @@
     "imba": "^2.0.0-alpha.165",
     "imba-inertia-adapter": "^2.0.0-alpha.3",
     "lodash": "^4.17.21",
-    "multer": "^1.4.3",
+    "multer": "^1.4.5-lts.1",
     "typescript": "4.3.5"
   },
   "devDependencies": {
