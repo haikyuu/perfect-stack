@@ -1,4 +1,12 @@
-# perfect-stack
+# perfect-stack 2
+<BlockComponent
+block={{"type":"file","id":"file-block","title":"Scrimba File Block","description":"Record interactive code-casts inside Github","entry":"blocks/scrimba-block.tsx","matches":["*"],"example_path":"https://github.com/imba/imba/README.md","owner":"haikyuu","repo":"scrim-block"}}
+context={{"repo":"perfect-stack","owner":"haikyuu","path":"README.md","sha":"main","file":"README.md"}}
+height={743}
+/>
+<iframe src="https://dev.scrimba.com:3000/scrim/crb2RqS6"  width="100%" height="400px"/>
+
+
 The perfect stack is comprised of three main technologies:
 - [EdgeDB](https://edgedb.com): the database
 - [Imba](https://imba.io/) : as the programming language with an integrated UI library
