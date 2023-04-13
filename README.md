@@ -1,4 +1,6 @@
 # perfect-stack
+<iframe src="https://scrimba.com/scrim/c2aZBJH2" width="100%" height="700px"></iframe>
+
 The perfect stack is comprised of three main technologies:
 - [EdgeDB](https://edgedb.com): the database
 - [Imba](https://imba.io/) : as the programming language with an integrated UI library
